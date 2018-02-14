@@ -1,0 +1,51 @@
+***************
+*** 760,766 ****
+  #else
+    ip = (int32_t *)(clientsig+8);
+    for (i = 2; i < RTMP_SIG_SIZE/4; i++)
+-     *ip++ = rand();
+  #endif
+  
+    /* set handshake digest */
+--- 760,766 ----
+  #else
+    ip = (int32_t *)(clientsig+8);
+    for (i = 2; i < RTMP_SIG_SIZE/4; i++)
++     *ip++ = ((rand() & 0xFFFF) << 16) | (rand() & 0xFFFF);
+  #endif
+  
+    /* set handshake digest */
+***************
+*** 1099,1105 ****
+      {
+        encrypted = FALSE;
+      }
+-   else if (type == 6 || type == 8)
+      {
+        offalg = 1;
+        encrypted = TRUE;
+--- 1099,1105 ----
+      {
+        encrypted = FALSE;
+      }
++   else if (type == 6 || type == 8 || type == 9)
+      {
+        offalg = 1;
+        encrypted = TRUE;
+***************
+*** 1148,1154 ****
+  #else
+    ip = (int32_t *)(serversig+8);
+    for (i = 2; i < RTMP_SIG_SIZE/4; i++)
+-     *ip++ = rand();
+  #endif
+  
+    /* set handshake digest */
+--- 1148,1154 ----
+  #else
+    ip = (int32_t *)(serversig+8);
+    for (i = 2; i < RTMP_SIG_SIZE/4; i++)
++     *ip++ = ((rand() & 0xFFFF) << 16) | (rand() & 0xFFFF);
+  #endif
+  
+    /* set handshake digest */

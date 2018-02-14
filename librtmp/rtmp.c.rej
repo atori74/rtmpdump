@@ -1,0 +1,25 @@
+***************
+*** 1177,1185 ****
+  {
+    int bHasMediaPacket = 0;
+  
+-   while (!bHasMediaPacket && RTMP_IsConnected(r)
+- 	 && RTMP_ReadPacket(r, packet))
+      {
+        if (!RTMPPacket_IsReady(packet) || !packet->m_nBodySize)
+  	{
+  	  continue;
+--- 1189,1201 ----
+  {
+    int bHasMediaPacket = 0;
+  
++   while (!bHasMediaPacket && RTMP_IsConnected(r))
+      {
++       if (!RTMP_ReadPacket(r, packet)) //Note: no free required here
++         {
++           break;
++         }
++ 
+        if (!RTMPPacket_IsReady(packet) || !packet->m_nBodySize)
+  	{
+  	  continue;
