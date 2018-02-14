@@ -1,6 +1,6 @@
 VERSION=v2.4
 
-prefix=/usr/local
+prefix=$(HOME)/usr
 
 CC=$(CROSS_COMPILE)gcc
 LD=$(CROSS_COMPILE)ld
